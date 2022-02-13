@@ -61,20 +61,38 @@ calc.addEventListener("click", function (event) {
 
 function setOperator(sign) {
     // console.log(num, firstNum, secondNum, operator);
-    // debugger;
-    if (num.length == 0) { return; }
+    debugger;
 
-    firstNum = secondNum;
-    secondNum = num;
-    num = '';
+    if (num.length == 0) {
+        if (sign == '=') {
+            showResult(parseInt(firstNum));
+            operator = '';
+        } else {
+            operator = sign;
+        }
+        return;
+    }
+
+    if (num.length > 0) {
+        if (secondNum.length > 0) { firstNum = secondNum; }
+
+        secondNum = num;
+        num = '';
+    }
 
     if (operator.length > 0 && firstNum.length > 0 && secondNum.length > 0) {
         let res = setResult();
         showResult(res);
+        if (sign == '=') {
+            sign = '';
+        }
     }
     if (sign == '=') {
         // console.log('=');
-        if (secondNum.length > 0) { showResult(secondNum); }
+        if (secondNum.length > 0 && operator.length == 0) {
+            showResult(parseInt(secondNum));
+        }
+
         operator = '';
     }
     else {
@@ -88,13 +106,13 @@ function setResult() {
             result = parseInt(firstNum) + parseInt(secondNum);
             break;
         case '-':
-            result = parseInt(firstNum) + parseInt(secondNum);
+            result = parseInt(firstNum) - parseInt(secondNum);
             break;
         case '*':
-            result = parseInt(firstNum) + parseInt(secondNum);
+            result = parseInt(firstNum) * parseInt(secondNum);
             break;
         case '/':
-            result = parseInt(firstNum) + parseInt(secondNum);
+            result = parseInt(firstNum) / parseInt(secondNum);
             break;
         default:
             break;
@@ -103,5 +121,6 @@ function setResult() {
 }
 function showResult(res) {
     firstNum = '' + res;
+    secondNum = '';
     console.log("result", res);
 }
