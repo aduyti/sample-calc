@@ -122,5 +122,6 @@ function setResult() {
 function showResult(res) {
     firstNum = '' + res;
     secondNum = '';
+    document.getElementById('result').innerText = res;
     console.log("result", res);
 }
