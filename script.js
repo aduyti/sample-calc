@@ -56,48 +56,52 @@ calc.addEventListener("click", function (event) {
                 break;
         }
     }
-    console.log(num, firstNum, secondNum, operator);
+    // console.log(num, firstNum, secondNum, operator);
 });
 
 function setOperator(sign) {
-    if (operator.length > 0 && firstNum.length > 0) {
-        setResult(firstNum, secondNum, operator);
-    }
-    if (num.length > 0) {
-        firstNum = secondNum;
-        secondNum = num;
-        num = '';
-    }
-    else {
-        return 0;
+    // console.log(num, firstNum, secondNum, operator);
+    // debugger;
+    if (num.length == 0) { return; }
+
+    firstNum = secondNum;
+    secondNum = num;
+    num = '';
+
+    if (operator.length > 0 && firstNum.length > 0 && secondNum.length > 0) {
+        let res = setResult();
+        showResult(res);
     }
     if (sign == '=') {
-        console.log('=');
+        // console.log('=');
+        if (secondNum.length > 0) { showResult(secondNum); }
         operator = '';
     }
     else {
         operator = sign;
     }
 }
-function setResult(num1, num2, sign) {
-    console.log(num1, num2, sign);
+function setResult() {
     let result = 0;
-    switch (sign) {
+    switch (operator) {
         case '+':
-            result = parseInt(num1) + parseInt(num2);
+            result = parseInt(firstNum) + parseInt(secondNum);
             break;
         case '-':
-            result = parseInt(num1) + parseInt(num2);
+            result = parseInt(firstNum) + parseInt(secondNum);
             break;
         case '*':
-            result = parseInt(num1) + parseInt(num2);
+            result = parseInt(firstNum) + parseInt(secondNum);
             break;
         case '/':
-            result = parseInt(num1) + parseInt(num2);
+            result = parseInt(firstNum) + parseInt(secondNum);
             break;
         default:
             break;
     }
-    console.log(result);
-
+    return result;
+}
+function showResult(res) {
+    firstNum = '' + res;
+    console.log("result", res);
 }
