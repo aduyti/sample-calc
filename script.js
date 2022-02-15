@@ -65,7 +65,7 @@ function setOperator(sign) {
 
     if (num.length == 0) {
         if (sign == '=') {
-            showResult(parseInt(firstNum));
+            showResult(parseInt(firstNum) || 0);
             operator = '';
         } else {
             operator = sign;
